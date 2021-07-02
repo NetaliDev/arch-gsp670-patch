@@ -1,0 +1,18 @@
+--- linux-5.11.7/sound/usb/card.c	2021-03-17 17:11:47.000000000 +0100
++++ linux-5.11.7-patched/sound/usb/card.c	2021-03-19 00:53:57.155681529 +0100
+@@ -274,6 +274,15 @@
+ 			return -EINVAL;
+ 		}
+ 
++		// Sennheiser GSP 670: create streams in reverse order
++		if (chip->usb_id == USB_ID(0x1395, 0x0089))
++		{
++			snd_usb_create_stream(chip, ctrlif, 4);
++			snd_usb_create_stream(chip, ctrlif, 2);
++			snd_usb_create_stream(chip, ctrlif, 1);
++			return 0;
++		}
++
+ 		for (i = 0; i < h1->bInCollection; i++)
+ 			snd_usb_create_stream(chip, ctrlif, h1->baInterfaceNr[i]);
+ 
