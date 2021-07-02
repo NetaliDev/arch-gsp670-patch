@@ -4,6 +4,24 @@ VER=$(uname -r | awk -F "-" '{print $1}')
 DIR=linux-$VER
 FILENAME=$DIR.tar.xz
 
+lsusb | grep "GSP 670" > /dev/null
+HEADSET_CONNECTED=$?
+
+lsusb | grep "GSA 70" > /dev/null
+DONGLE_CONNECTED=$?
+
+if [ $HEADSET_CONNECTED -eq 0 ]
+then
+    echo "The GSP 670 Headset is still connected --> please disconnect it and try again!"
+    exit 1
+fi
+
+if [ $DONGLE_CONNECTED -eq 0 ]
+then
+    echo "The GSA 70 Dongle is still connected --> please disconnect it and try again!"
+    exit 1
+fi
+
 echo "downloading"
 curl -O https://cdn.kernel.org/pub/linux/kernel/v5.x/$FILENAME
 echo "unpacking"
