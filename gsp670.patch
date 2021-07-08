@@ -4,8 +4,8 @@
  			return -EINVAL;
  		}
  
-+		// Sennheiser GSP 670: create streams in reverse order
-+		if (chip->usb_id == USB_ID(0x1395, 0x0089))
++		// Sennheiser GSA 70 and GSP 670: create streams in reverse order
++		if (chip->usb_id == USB_ID(0x1395, 0x0089) || chip->usb_id == USB_ID(0x1395, 0x008a))
 +		{
 +			snd_usb_create_stream(chip, ctrlif, 4);
 +			snd_usb_create_stream(chip, ctrlif, 2);
