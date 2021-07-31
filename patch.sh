@@ -46,17 +46,17 @@ echo "building module"
 make M=sound/usb
 
 echo "compressing module"
-xz -f sound/usb/snd-usb-audio.ko
+zstd sound/usb/snd-usb-audio.ko
 
 echo "unloading modules"
 sudo modprobe -r snd_usb_audio
 sudo modprobe -r snd_usbmidi_lib
 
 echo "backing up old module"
-cp /usr/lib/modules/$(uname -r)/kernel/sound/usb/snd-usb-audio.ko.xz snd-usb-audio.ko.xz.backup
+cp /usr/lib/modules/$(uname -r)/kernel/sound/usb/snd-usb-audio.ko.zst snd-usb-audio.ko.zst.backup
 
 echo "installing new module"
-sudo cp -f sound/usb/snd-usb-audio.ko.xz /usr/lib/modules/$(uname -r)/kernel/sound/usb/
+sudo cp -f sound/usb/snd-usb-audio.ko.zst /usr/lib/modules/$(uname -r)/kernel/sound/usb/
 
 echo "loading new modules"
 sudo modprobe snd_usbmidi_lib
