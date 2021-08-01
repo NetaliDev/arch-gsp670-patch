@@ -6,6 +6,7 @@ The patch-script is based on the fix of the user "Kealy" in https://bbs.archlinu
 ## Usage
 ### Arch-Linux
 **NOTE: This script is only tested and built for Arch-Linux**
+
 Basic usage:
 ```
 ./patch.sh
