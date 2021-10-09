@@ -36,8 +36,18 @@ echo "copying config"
 cp /usr/lib/modules/$(uname -r)/build/.config ./
 cp /usr/lib/modules/$(uname -r)/build/Module.symvers ./
 
+# cut out extra-version string
+EV_PARTS=()
+
+for part in $(uname -r | tr "-" "\n")
+do
+    EV_PARTS+=($part)
+done
+
+EV_STRING="-${EV_PARTS[1]}-${EV_PARTS[2]}"
+
 echo "make modules_prepare"
-make EXTRAVERSION=-arch1-1 modules_prepare
+make EXTRAVERSION=$EV_STRING modules_prepare
 
 echo "installing patch"
 patch -p1 -i ../gsp670.patch
