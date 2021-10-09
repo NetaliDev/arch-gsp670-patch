@@ -12,10 +12,5 @@ Basic usage:
 ./patch.sh
 ```
 
-Set some makeflags to speed up the compile-process:
-```
-MAKEFLAGS="-j 4" ./patch.sh
-```
-
 ### Other Linux-Distros
 It should work similarly under other Linux distributions. In the end you only have to patch the file sound/usb/card.c and build the sound module (or a whole kernel) from it.

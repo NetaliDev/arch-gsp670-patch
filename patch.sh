@@ -4,6 +4,8 @@ VER=$(uname -r | awk -F "-" '{print $1}')
 DIR=linux-$VER
 FILENAME=$DIR.tar.xz
 
+export MAKEFLAGS="-j $(nproc)"
+
 lsusb | grep "GSP 670" > /dev/null
 HEADSET_CONNECTED=$?
 
