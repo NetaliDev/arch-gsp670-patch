@@ -63,7 +63,9 @@ sudo modprobe -r snd_usb_audio
 sudo modprobe -r snd_usbmidi_lib
 
 echo "backing up old module"
-cp /usr/lib/modules/$(uname -r)/kernel/sound/usb/snd-usb-audio.ko.zst snd-usb-audio.ko.zst.backup
+BACKUP_DIR=../backups/$(uname -r)
+mkdir -p $BACKUP_DIR
+cp /usr/lib/modules/$(uname -r)/kernel/sound/usb/snd-usb-audio.ko.zst $BACKUP_DIR/snd-usb-audio.ko.zst.backup
 
 echo "installing new module"
 sudo cp -f sound/usb/snd-usb-audio.ko.zst /usr/lib/modules/$(uname -r)/kernel/sound/usb/
